@@ -1,0 +1,21 @@
+﻿<Window x:Class="Восьмерка.windows.AddMatsFromList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Восьмерка.windows"
+        mc:Ignorable="d"
+        Title="AddMatsFromList" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" Width="250">
+            
+            <TextBox x:Name="tbSearch" TextChanged="tb_TextChanged" Height="30" Margin="10, 5"/>
+            <ComboBox DisplayMemberPath="Title" SelectedValue="{Binding ID}" SelectedValuePath="ID" Name="cb_Prods" Margin="10" Height="30">
+                
+            </ComboBox>
+            <Label Content="Количество" Margin="10, 5"/>
+            <TextBox Text="{Binding Count}" Margin="10, 5" Name="tb_Count"/>
+            <Button Content="Сохранить" Width="250" Height="30"  Click="bt_Edit" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

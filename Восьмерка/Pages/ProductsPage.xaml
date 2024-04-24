@@ -1,0 +1,93 @@
+﻿<Page x:Class="Восьмерка.Pages.ProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Восьмерка.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductsPage">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="tbSearch" Width="200" Height="30" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="10" TextChanged="tbChanged"/>
+            <ComboBox Name="cbProdType" Width="180" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="cbTypes_Changed">
+                
+            </ComboBox>
+            <ComboBox Name="cbSort" Width="180" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="cbSort_Changed" Margin="10">
+                <ComboBoxItem>
+                    <Label Content="Наименования А-Я"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Label Content="Наименования Я-А"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Label Content="№ Цеха &#x2193;"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Label Content="№ Цеха &#x2191;"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Label Content="Мин. стоимость для агента &#x2193;"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Label Content="Мин. стоимость для агента &#x2191;"/>
+                </ComboBoxItem>
+            </ComboBox>
+            <Button Content="Добавить" Click="Add_Click" Height="30" Width="100"/>
+            <Button x:Name="btChangeOn" Width="100" Height="30" Content="Изменить на..." Click="btChangeOn_Click" Visibility="Hidden"></Button>
+        </StackPanel> 
+        <StackPanel Grid.Row="1">
+            <ListView Background="#D3D3D3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lw1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="430" SelectionChanged="lw_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5"  BorderThickness="2" BorderBrush="Black"  Background="White">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="190" Margin="10" Width="650" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding ImagePath}" Width="90" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                    <StackPanel Width="400" HorizontalAlignment="Left" Margin="5">
+                                        <TextBlock  TextAlignment="Center" TextWrapping="Wrap" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" >
+                                    <Run Text="{Binding ProductType.Title}"/>
+                                    <Run Text=" | "/>
+                                    <Run Text="{Binding Title}" Foreground="{Binding ForeColor}"/>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding ArticleNumber}" Margin="0, 3"/>
+                                        <TextBlock Text="{Binding ProductionPersonCount,StringFormat={} {0} чел. для изготовления}" Margin="0, 3"/>
+                                        <TextBlock Text="{Binding MinCostForAgent,StringFormat={} Мин. стоимость для агента: {0}}" Margin="0, 3"/>
+                                        <TextBlock Text="{Binding ProductionWorkshopNumber,StringFormat={} № цеха: {0}}" Margin="0, 3"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Materials, StringFormat={} Материалы: {0}}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Cost, StringFormat={}{0:f2} руб.}" FontStyle="Italic" FontSize="14"/>
+                                </StackPanel>
+                                <DockPanel Margin="0,10" HorizontalAlignment="Center">
+                                    <Button Click="Edit_Click" Width="100" HorizontalAlignment="Left" Margin="5, 0" Height="30">Редактировать</Button>
+                                </DockPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Click="GoToFirstPage" Content="&lt;&lt;" Width="10"></Button>
+            <Button Click="GoToPreviousPage" Content="&lt;"></Button>
+            <TextBox Name="TxtCurrentPage" Height="30" Width="50"></TextBox>
+            <Label Name="LblTotalPages" Height="30">of N</Label>
+            <Button Click="GoToNextPage" Content="&gt;"></Button>
+            <Button Click="GoToLastPage" Content="&gt;&gt;"></Button>
+            <Label Name="LblInfo" Margin="10" Height="30">of N</Label>
+        </StackPanel>
+    </Grid>
+</Page>
